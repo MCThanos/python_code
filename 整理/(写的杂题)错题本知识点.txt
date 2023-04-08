@@ -1,0 +1,147 @@
+1：range()里的数是表示从多少到多少，所以可以从高到底，8遍历到1那样。列表的排序改变可以这样： if range[i] >range[i+1]: range[i],range[i+1]=
+range[i+1],range[i]
+range[10,0,-1]表示倒序从10到0.
+2:ord ('a')会返回小写字母a的ascii码(只能是长度为一的字符串).   ASCII码转字符：chr(int)       set函数(去除重复元素)用法：b=list(set(a))  
+set()函数只可以用于字符串，不能用于int类型.
+3：三种拷贝方式：一：a=[1,2,3,4]  b=a   这种a与b的id()地址是一样的，打印的内容也一样，赋值连外表都是同一个地址。剩下两种拷贝首先要记忆：
+不可变类型：Number（数字）String（字符串）Tuple（元组）
+可变类型：List（列表）Dictionary（字典）Set（集合）                                            a[0][0]
+然后浅拷贝：只判断最外层，是不可变类型则全部id一样；是可变类型id不一样，但是内层不做判断，内层的id还是一样。即：对于内层，原与拷贝id绝对
+一样，拷贝完分别改变数据互不影响，拷贝后改变的数据改变了地址，但是拷贝的数据还是指向拷贝前的数据地址，这个应该是内存原因。最外层的id看
+数据类型而定。像渗透一样，到外壳是不一样的，但是到里面的数字就一样了。表的类型和数字一个个地址分别存起来。
+深拷贝：最外层是不可变类型但是内层是可变的，id都不一样；最外层是可变类型，内层不可变，外层的id不一样，内层id一样；都是不可变的,id都一样
+都是可变的,id都不一样。
+浅拷贝是共享一个内存，深拷贝是两个内存。拷贝不会对同一个不可变对象申请另一个内存。对于列表内的列表浅拷贝和深拷贝地址不一样，所以改变列
+表内列表的元素浅拷贝会变，深拷贝不会。对于列表内的改变而不是列表的列表内的改变，深拷贝和浅拷贝是一样的，都会指向改变前的地址。
+浅拷贝或深拷贝都要：import copy       （浅） copy.copy(a)       （深）copy.deepcopy(a)
+4：列表交集(元素交集)：b3=list(set(b1) & set(b2))             列表并集(元素并集)：b3=list(set(b1) | set(b2))
+列表差集（补集）:b3=list(set(b1)-set(b2))   (b1有而b2没有的)           b3=list(set(b2)-set(b1))        (b2有而b1没有的)
+对称差集:  b3=list(set(b1)^set(b2))       (不同时存在于两个集合的元素的集合)
+字符串也可以和列表一样使用，a[0]。也可以字符串遍历,a[:]。
+split返回值是列表。
+split函数另一种用法：str.split('.',2)[1]         str.split('.',3)  ''里是输入分割的分隔符，2是分割次数，[]里是选取分割后的第几个片段。默认分隔符为空格
+  字符串合并：      for s in ["A", "B", "C", "D"]:       long_string += s
+切片是第一项为0或者没有，都从第一项开始，-1同理；有数就从列表中对应数开始到另一个数的前一项，前闭后开区间。然后切片
+set(a)去除重复元素。set()出来是集合，加list()变回列表。
+set('')里只接一个字符串时会把字符串拆开变成字符集合，如果是多个字符串就不会拆开。
+5： type('a')判断数据类型,   a.isdigit ()判断是否是纯数字类型，str.isalnum() -> bool 返回值为布尔类型，判断是否是由字母和数字或其一构成。
+a.reverse()只能对列表执行，字符串不能。
+print(a,b)，会默认为空格
+6：输出的三种格式化形式：1：占位符%型 ：print('my name is %s  and age %d   '%(a,b))顺序排列，' '内是输出内容，%s是字符串的占位符，%d是整数
+的占位符（十进制），%f/%F是浮点型占位符，%o是八进制占位符，%x/%X是十六进制占位符。
+num = 3.141526
+print('%0.2f' %num)      # 保留两位小数    
+print('%10.1f' %num)     # 占10个空格, 右对齐
+print('%-10.2f' %num)    # 占10个空格, 左对齐
+       2：format输出：
+print('My name is {}, My age is {}'.format(name,age))
+print('My name is {0}, My age is {1}'.format(name,age))
+print('My name is {name}, My age is {age}'.format(name='xiaoming',age=12))
+#输出：My name is xiaoming,My age is 12
+format其它用法：
+# 先取到值,然后在冒号后设定填充格式：{索引:[填充字符][对齐方式][宽度]}
+# *<20：左对齐，总共20个字符，不够的用*号填充(宽度前可以加空格，表示在输出目标前打印空格，仅此而已)
+print('{0:*<20}'.format('hellopython'))
+# *>20：右对齐，总共20个字符，不够的用*号填充
+print('{0:*>20}'.format('hellopython'))
+# *^20：居中显示，总共20个字符，不够的用*号填充
+print('{0:*^20}'.format('hellopython'))
+#保留2位有效数字
+print("{:.2f}".format(3.1415926))
+#转成二进制
+print('{0:b}'.format(16))
+#转成八进制
+print('{0:o}'.format(10))
+#转成十六进制
+print('{0:x}'.format(15)) 
+#转成科学计数法（d就只是整数）
+print('{0:e}'.format(15)) 
+
+        3：f-string输出：字符串前面加上 "f"，{}直接使用变量、表达式，函数等。print(f'My name is {name},My age is {age}')
+print(f'{1+2+3}')        print(f'{name.upper()}')
+7：打开文件.read()函数使用方法：1，函数按单位字节（二进制）或字符（字符串）来读取.read(6),是读取文件6个字符或6个数字，没有默认读取全部，
+超过范围不会报错。
+     	.readline() 函数：逐行读取文件中的内容；
+	.readlines() 函数：一次性读取文件中多行内容。
+8：打印全排列：(nums)括号里,(num,2)意思是输出长度为2的排列。默认全排列。
+import itertools
+nums = ['a','b','c']
+for num in itertools.permutations(nums):
+    print(num)
+
+9：x = "long"                  # (1).基本形式
+x, y = "long", "shuai"      # (2).元组对应赋值
+[x, y] = ["long", "shuai"]  # (3).列表对应赋值
+a, b, c, d = "long"         # (4).序列赋值
+a, *b = 'long'              # (5).解包赋值
+a = b = "long"              # (6).多目标赋值
+a += 3                      # (7).二元赋值表达式  但是不支持自增自减。
+((a, b), c) = ('lo','ng')   # (8).嵌套赋值序列
+
+10：min(x)max(x)函数用列表放里面。python没有char类型，字符串可以进行*操作：'张三'*3。set()把字符串变成字符且去掉重复字符。建立空集合用set()
+而不是{}。
+11.字符串是不可变的，无法重新赋值。smart_girl.get("sex", "找不见性别")  #可以指定key不存在时，返回一个指定的默认值
+字典用update({})来添加.import  math ，math.pi表示Π的值。*字典表示keys,**字典表示每一个key=value。集合用
+一个字符串就把它拆开变成列表，如果多个字符串就要放在一个元组或者列表中来使用set()。repr()返回一个对象的string格式，对数字没用，对字符串有用，
+且可以打印出/t/n等字符。.rjust(50, '0')，50表示打印的长度，0是填充，r是右对齐，ljust()是左对齐，center是居中，和那些<>是等效的。find('')表示
+寻找字符串中有无目标字符串，有则返回第一个字符所在的索引，无则返回-1，不能用于列表。'-'.join(列表)是以指定字符连接列表的元素组成新字符串的函数，新字符串间
+连接的是指定的字符，str.join(列表)，join()对象是字符串列表，列表元素不能是数。.strip('-')strip()一个是去除指定字符，一个是去除空格，只能去除头尾的部分。str.replace("is", "was", 3)replace()可以这样用，但是在datet
+ime模块里替换日期用replace(year=a.year+1)这样。.bin()接受整数，返回字符串二进制。pickle模块的dumps()函数可以转换任意对象为二进制，loads()
+函数可以把二进制转换为原本数据。picple模块还有两个函数是dump()load()两个也是相互对应的，dump()用于wb形式打开的文件，把写入的数据变成
+二进制，load()用rb形式打开，转换二进制数据为python对象。with open ("a.txt", 'wb') as f:  pickle.dump(tup1, f)
+ with open ("a.txt", 'rb') as f:   t3 = pickle.load(f)
+12：f=open('txt','r'),list(f)=f.read()约等于f.readlines()读取区别内容，f.read(3)指定读取多少字节的内容，同理f.readlines(3)表示读取3行的内容.无论
+是readline()read()readlines()读取文件都是包括\n的。for line in f: print line ：通过迭代器访问。f.tell()：返回一个整数,表示当前文件指针的位置
+有的open('./txt','r')的./表示同级目录中的txt文件，../表示上一级目录中的文件。
+f.seek(偏移量,[起始位置])：用来移动文件指针。
+偏移量: 单位为字节，可正可负
+起始位置: 0 - 文件头, 默认值; 1 - 当前位置; 2 - 文件尾
+file.name：返回文件的名称；
+file.mode：返回打开文件时，采用的文件打开模式；
+file.encoding：返回打开文件时使用的编码格式；
+file.closed：判断文件是否己经关闭。
+以二进制形式打开的文件不能用'utf-8'的编码格式，二者不能共存。在二进制打开的文件里写入字符串，前要加上b:b'xyz'
+while line := fp.readline():这个和赋值运算符 = 类似，可以看作是一种新的赋值运算符。
+现在打开文件和写入有两种方法：一用with open('','',encoding='utf-8')  用write()二：x=sys.stdout  sys.stdout=open('','',enconding='utf-8') 使用print()
+最后sys.stdout.close()  sys.stdout=x。
+
+13:print([f(i) for i in nums if f(i) > 5])这种学长说在项目里常用。
+如果希望用户输入一个数字，并用程序对数字进行计算，可以直接用eval(input(<输入提示字符串>))组合。
+eval()函数的作用是将输入的字符串转为python语句，并执行该语句。
+python有时候输出0.1+0.2会等于0.30000004这样的东西。一行写多条python语言是分号;
+对于复数，x.imag输出的是复数的虚部。round()是保留小数数位的，round(x,3)保留三位小数。整数和小数相等类型不同也是true。
+python隔行输入文件不会写。
+列表相连要:c=a+b这样或者a.extend(b)区别：加号是生成一个新对象，extend不是
+14：打印分数不是小数，需要引入fractions模块的Fraction，然后Fraction('2/4')接受一个字符串分数，这样一个表示一个分数，相加即可。结果是最简分数。
+x.numerator表示分数的分子，x.denominator表示分数的分母。
+使用count()时，当对象是字符串列表时，只count固定字符串，当对象是字符串时，只count字符。
+需要a=a.replace('ou','')不然直接print(a.replace('ou',''))
+获取列表元素索引，a.index(2)        round() 方法返回浮点数x的四舍五入值。round(x,n)   x -- 数值表达式。n -- 数值表达式，表示从小数点位数。
+切片的符号是：而不是，
+15：
+list.sort(cmp=None, key=None, reverse=False)
+cmp -- 可选参数, 如果指定了该参数会使用该参数的方法进行排序。
+key -- 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。
+reverse -- 排序规则，reverse = True 降序， reverse = False 升序（默认）。
+random = [(2, 2), (3, 4), (4, 1), (1, 3)]
+# 指定第二个元素排序
+random.sort(key=lambda student: student[1])
+def mycmp1(x,y):
+        return x-y
+numbers.sort(cmp = mycmp1)
+key=lambda student: student.age（类）
+两两比较，如果返回为正，则交换两者的位置，即y在前x在后，否则x在前y在后。也可以这样解释，升序就是拿第一个数比对后面的数，降序就是
+拿最后一个数比对前面的数。
+python3.x中取消了cmp参数，也不支持直接往sort()里面传函数，但可以构造排序函数传递给key来实现。
+y.sort(key=lambda x:(x[2],x[0]),reverse=True)满足第一个条件后按第二个条件排序。
+16：while True:
+	try:
+		a,b=map(int,input().split())
+		print(a+b)
+	except:
+		break
+当输入为空的时候，会自动停止程序，虽然是while True。
+17：求列表长度：
+len(c)
+len(list)的方式来求
+18：replace()支持正则匹配
